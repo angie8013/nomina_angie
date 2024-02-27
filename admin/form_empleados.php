@@ -1,6 +1,6 @@
 <?php
 //conectar bd
-require_once("db/conection.php");
+require_once("../db/conection.php");
 $db = new Database();
 $con = $db->conectar();
 session_start();
@@ -17,12 +17,13 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
     $foto = $_POST['foto'];
     $id_puesto = $_POST['id_puesto'];
     $id_rol = $_POST['id_rol'];
+    $pass = hash('sha512', $pass);
 
     $sql=$con -> prepare ("SELECT*FROM usuarios where id_us = '$id_us' or nombre_us = 'nombre_us'");
     $sql -> execute();
     $fila = $sql -> fetchALL(PDO::FETCH_ASSOC);
 
-    if ($id_us=="" || $id_puesto=="" || $id_rol=="")
+    if ($id_us=="" || $nombre_us=="" || $apellido_us=="" || $correo_us=="" || $tel_us==""||  $pass=="" || $id_puesto=="" || $id_rol=="")
     {
     echo '<script>alert("EXISTEN DATOS VACIOS"); </script>';
    
@@ -50,46 +51,47 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Document</title>
 </head>
-<body style="background-color: aliceblue;">
+<body class="section text-center container-sm" style="background-color: white;">
   
-    <div class="section text-center container-sm" style="background-color: white;">
+			<div class="row full-height justify-content-center">
+
         <h1 class="mb-4 pb-3">REGISTRO DE EMPLEADOS</h1> 
     <div class="card-body" >
     <form action="#" name="form" method="post">
 
-        <div class="form-row">
-          <div class="form-group col-md-4">
+        <div class="row">
+          <div class="form-group  col-md-4">
             <label >* Cedula</label>
-            <input type="text" class="form-control" name="id_us" placeholder="Cedula del usuario" required>
+            <input type="text" class="form-control border border-dark mb-3" name="id_us" placeholder="Cedula del usuario" required>
           </div>
           <div class="form-group col-md-4">
             <label >Nombre</label>
-            <input type="text" class="form-control" name="nombre_us" placeholder="Nombre Completo">
+            <input type="text" class="form-control border border-dark mb-3" name="nombre_us" placeholder="Nombre Completo">
           </div>
         
         <div class="form-group col-md-4">
           <label>Apellido</label>
-          <input type="text" class="form-control" name="apellido_us" placeholder="Apellido completo">
+          <input type="text" class="form-control border border-dark mb-3" name="apellido_us" placeholder="Apellido completo">
         </div>
    
         <div class="form-group col-md-5">
           <label>Correo</label>
-          <input type="text" class="form-control" name="correo_us" placeholder="Correo electronico">
+          <input type="text" class="form-control border border-dark mb-3" name="correo_us" placeholder="Correo electronico">
         </div>
 
         <div class="form-group col-md-4">
             <label>Contraseña</label>
-            <input type="password" class="form-control" name="pass">
+            <input type="password" class="form-control border border-dark mb-3" name="pass">
           </div>
           
           <div class="form-group col-md-3">
             <label>Telefono</label>
-            <input type="number" class="form-control" name="tel_us" placeholder="Numero de contacto">
+            <input type="number" class="form-control border border-dark mb-3" name="tel_us" placeholder="Numero de contacto">
           </div>
           
           <div class="form-group col-md-4">
             <label >* Puesto</label>
-            <select name="id_puesto" class="form-control" required  >
+            <select name="id_puesto" class="form-control border border-dark mb-3" required  >
                     <option value="">Seleccione Puesto</option>
 
                                                     <?php
@@ -104,7 +106,7 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
           </div>
           <div class="form-group col-md-4">
             <label >* Rol</label>
-            <select name="id_rol" class="form-control" required>
+            <select name="id_rol" class="form-control border border-dark mb-3" required>
                     <option value="">Seleccione Rol</option>
 
                                                     <?php
@@ -119,21 +121,20 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
           </div>
           <div class="form-group col-md-4">
             <label class="form-label">foto del usuario</label>
-            <input class="form-control" type="file" name="foto">
+            <input class="form-control border border-dark mb-3" type="file" name="foto">
           </div>    
         </div>
-
-        </div>
-                        <input class="btn btn-outline-primary" type="submit" name="validar" value="registrar">
+        <input class="btn btn-outline-primary" type="submit" name="validar" value="registrar">
                         <input type="hidden" name="MM_insert" value="regm">
+        </div>
       </form>
     </div>
     
-    <div class="section text-center container-sm" style="background-color: white;" onload="frm_guardar.tipu.focus()">
-   
-    
-      <div class="table-responsive-lg">
-      <table class="table table-dark mn-auto">
+    <body onload="frm_guardar.tipu.focus()">
+      <div class="table-responsive container-sm ">
+      <table class="table table-dark mn-auto">   
+  
+      <table class="table table-light">
 
         <form autocomplete="off" name="frm_consulta" method="GET">
             <thead class="thead-dark">
@@ -158,14 +159,14 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
           ?>
           <tbody>
             <tr>
-              <td><input name="id_us" type="text" value="<?php echo $resul['id_us'] ?>" readonly="readonly" /></td>
-              <td ><input name="nombre_us" type="text" value="<?php echo $resul['nombre_us'] ?>" readonly="readonly" /></td>
-              <td><input name="apellido_us" type="text" value="<?php echo $resul['apellido_us'] ?>" readonly="readonly" /></td>
-              <td><input name="correo_us" type="text" value="<?php echo $resul['correo_us'] ?>" readonly="readonly"  /></td>
-              <td><input name="tel_us" type="text" value="<?php echo $resul['tel_us'] ?>" readonly="readonly"  /></td>
-              <td><input name="pass" type="text" value="<?php echo $resul['pass'] ?>" readonly="readonly"  /></td>
-              <td><input name="id_puesto" type="text" value="<?php echo $resul['cargo'] ?>" readonly="readonly"  /></td>
-              <td><input name="id_rol" type="text" value="<?php echo $resul['TP_user'] ?>" readonly="readonly"/></td>
+              <td><input class="form-control" name="id_us" type="text" value="<?php echo $resul['id_us'] ?>" readonly="readonly" /></td>
+              <td ><input class="form-control" name="nombre_us" type="text" value="<?php echo $resul['nombre_us'] ?>" readonly="readonly" /></td>
+              <td><input class="form-control" name="apellido_us" type="text" value="<?php echo $resul['apellido_us'] ?>" readonly="readonly" /></td>
+              <td><input class="form-control" name="correo_us" type="text" value="<?php echo $resul['correo_us'] ?>" readonly="readonly"  /></td>
+              <td><input  class="form-control" name="tel_us" type="text" value="<?php echo $resul['tel_us'] ?>" readonly="readonly"  /></td>
+              <td><input class="form-control" name="pass" type="text" value="<?php echo $resul['pass'] ?>" readonly="readonly"  /></td>
+              <td><input class="form-control" name="id_puesto" type="text" value="<?php echo $resul['cargo'] ?>" readonly="readonly"  /></td>
+              <td><input class="form-control" name="id_rol" type="text" value="<?php echo $resul['TP_user'] ?>" readonly="readonly"/></td>
 
               <td><a href="?id=<?php echo $resul['id_us'] ?>" class="btn" onclick="window.open('update-reg.php?id=<?php echo $resul['id_us'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-edit"></i></a></td>
               <td><a href="?id=<?php echo $resul['id_us'] ?>" class="btn" onclick="window.open('delete-reg.php?id=<?php echo $resul['id_us'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-trash-alt"></i></a></td>
