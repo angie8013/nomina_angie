@@ -8,16 +8,21 @@ session_start();
 <?php
 if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
     
-    $fecha = $_POST['fecha'];
-    $fecha_reingreso = $_POST['fecha_reingreso'];
     $id_us = $_POST['id_us'];
+    $nombre_us = $_POST['nombre_us'];
+    $apellido_us = $_POST['apellido_us'];
+    $correo_us = $_POST['correo_us'];
+    $tel_us = $_POST['tel_us'];
+    $pass = $_POST['pass'];
+    $foto = $_POST['foto'];
+    $id_puesto = $_POST['id_puesto'];
+    $id_rol = $_POST['id_rol'];
 
-
-    $sql=$con -> prepare ("SELECT*FROM permisos where id_us = '$id_us'");
+    $sql=$con -> prepare ("SELECT*FROM usuarios where id_us = '$id_us' or correo_us = '$correo_us'");
     $sql -> execute();
     $fila = $sql -> fetchALL(PDO::FETCH_ASSOC);
 
-    if ($fecha=="" || $fecha_reingreso=="" || $id_us=="")
+    if ($id_us=="" || $nombre_us=="" || $apellido_us=="" || $correo_us=="" || $tel_us==""||  $pass=="" || $foto=="" || $id_puesto=="" || $id_rol=="")
     {
     echo '<script>alert("EXISTEN DATOS VACIOS"); </script>';
    
@@ -27,7 +32,7 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
    
     }
     else {
-    $insertSQL = $con->prepare ("INSERT INTO permisos (fecha,fecha_reingreso,id_us) VALUES ('$fecha','$fecha_reingreso', '$id_us')");
+    $insertSQL = $con->prepare ("INSERT INTO usuarios (id_us,nombre_us,apellido_us,correo_us,tel_us,pass,foto,id_puesto,id_rol) VALUES ('$id_us','$nombre_us', '$apellido_us','$correo_us','$tel_us','$pass','$foto','$id_puesto','$id_rol')");
     $insertSQL->execute();
     echo '<script>alert("Registro exitoso"); </script>';
   
@@ -54,16 +59,16 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
         <div class="form-row">
         <div class="form-group col-md-4">
           <label>Cedula del usuario</label>
-          <input type="text" class="form-control" name="id_us" placeholder="Ingrese la cedula del usuario">
+          <input type="text" class="form-control" name="id_us" placeholder="Usuario">
         </div>
    
           <div class="form-group col-md-4">
             <label >Fecha de inicio</label>
-            <input type="datetime-local" class="form-control" name="fecha">
+            <input type="datetime-local" class="form-control" name="fecha" placeholder="Cedula del usuario">
           </div>
           <div class="form-group col-md-4">
             <label >Fecha de fin</label>
-            <input type="datetime-local" class="form-control" name="fecha_reingreso">
+            <input type="datetime-local" class="form-control" name="fecha_reingreso" placeholder="Nombre Completo">
           </div>    
       
         </div>

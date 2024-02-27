@@ -18,7 +18,7 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
     $id_puesto = $_POST['id_puesto'];
     $id_rol = $_POST['id_rol'];
 
-    $sql=$con -> prepare ("SELECT*FROM usuarios where id_us = '$id_us' or correo_us = '$correo_us'");
+    $sql=$con -> prepare ("SELECT*FROM usuarios where id_us = '$id_us' or nombre_us = 'nombre_us'");
     $sql -> execute();
     $fila = $sql -> fetchALL(PDO::FETCH_ASSOC);
 
@@ -53,14 +53,14 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
 <body style="background-color: aliceblue;">
   
     <div class="section text-center container-sm" style="background-color: white;">
-        <h1 class="mb-4 pb-3">REGISTO DE EMPLEADOS</h1> 
+        <h1 class="mb-4 pb-3">REGISTRO DE EMPLEADOS</h1> 
     <div class="card-body" >
     <form action="#" name="form" method="post">
 
         <div class="form-row">
           <div class="form-group col-md-4">
-            <label >Cedula</label>
-            <input type="text" class="form-control" name="id_us" placeholder="Cedula del usuario">
+            <label >* Cedula</label>
+            <input type="text" class="form-control" name="id_us" placeholder="Cedula del usuario" required>
           </div>
           <div class="form-group col-md-4">
             <label >Nombre</label>
@@ -88,8 +88,8 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
           </div>
           
           <div class="form-group col-md-4">
-            <label >Puesto</label>
-            <select name="id_puesto" class="form-control">
+            <label >* Puesto</label>
+            <select name="id_puesto" class="form-control" required  >
                     <option value="">Seleccione Puesto</option>
 
                                                     <?php
@@ -103,8 +103,8 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
               </select>
           </div>
           <div class="form-group col-md-4">
-            <label >Rol</label>
-            <select name="id_rol" class="form-control">
+            <label >* Rol</label>
+            <select name="id_rol" class="form-control" required>
                     <option value="">Seleccione Rol</option>
 
                                                     <?php
@@ -128,6 +128,56 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
                         <input type="hidden" name="MM_insert" value="regm">
       </form>
     </div>
+    
+    <div class="section text-center container-sm" style="background-color: white;" onload="frm_guardar.tipu.focus()">
+   
+    
+      <div class="table-responsive-lg">
+      <table class="table table-dark mn-auto">
+
+        <form autocomplete="off" name="frm_consulta" method="GET">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">N° ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Telefono</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">pin</th>
+                <th scope="col"> ROL</th>
+              </tr>
+            </thead>
+
+          <?php
+          $sql1 = $con->prepare("SELECT * FROM usuarios, puestos, roles WHERE usuarios.id_puesto = puestos.ID AND usuarios.id_rol = roles.ID ORDER BY id_us ASC");
+          $sql1->execute();
+          $resultado1 = $sql1->fetchAll(PDO::FETCH_ASSOC);
+          foreach ($resultado1 as $resul) {
+
+          ?>
+          <tbody>
+            <tr>
+              <td><input name="id_us" type="text" value="<?php echo $resul['id_us'] ?>" readonly="readonly" /></td>
+              <td ><input name="nombre_us" type="text" value="<?php echo $resul['nombre_us'] ?>" readonly="readonly" /></td>
+              <td><input name="apellido_us" type="text" value="<?php echo $resul['apellido_us'] ?>" readonly="readonly" /></td>
+              <td><input name="correo_us" type="text" value="<?php echo $resul['correo_us'] ?>" readonly="readonly"  /></td>
+              <td><input name="tel_us" type="text" value="<?php echo $resul['tel_us'] ?>" readonly="readonly"  /></td>
+              <td><input name="pass" type="text" value="<?php echo $resul['pass'] ?>" readonly="readonly"  /></td>
+              <td><input name="id_puesto" type="text" value="<?php echo $resul['cargo'] ?>" readonly="readonly"  /></td>
+              <td><input name="id_rol" type="text" value="<?php echo $resul['TP_user'] ?>" readonly="readonly"/></td>
+
+              <td><a href="?id=<?php echo $resul['id_us'] ?>" class="btn" onclick="window.open('update-reg.php?id=<?php echo $resul['id_us'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-edit"></i></a></td>
+              <td><a href="?id=<?php echo $resul['id_us'] ?>" class="btn" onclick="window.open('delete-reg.php?id=<?php echo $resul['id_us'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-trash-alt"></i></a></td>
+
+            </tr>
+            </tbody>
+          <?php 
+        } ?>
+        </form>
+      </table>
+      </div>
+      
 </div>
 </body>
 </html>
