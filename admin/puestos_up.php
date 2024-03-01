@@ -4,7 +4,7 @@ require_once("../db/conection.php");
 $db = new Database();
 $con = $db->conectar();
 
-$sql = $con -> prepare ("SELECT * FROM permisos WHERE permisos.id_permiso = '".$_GET['id']."'");
+$sql = $con -> prepare ("SELECT * FROM puestos WHERE puestos.ID = '".$_GET['id']."'");
 $sql -> execute();
 $usua = $sql -> fetch();
 ?>
@@ -12,10 +12,10 @@ $usua = $sql -> fetch();
 <?php
 if(isset($_POST["update"]))
 {
-    $fecha = $_POST['fecha'];
-    $fecha_reingreso = $_POST['fecha_reingreso'];
+    $cargo = $_POST['cargo'];
+    $salario = $_POST['salario'];
 
-    $insertSQL = $con->prepare ("UPDATE permisos SET fecha ='$fecha', fecha_reingreso = '$fecha_reingreso' WHERE id_permiso = '".$_GET['id']."'");
+    $insertSQL = $con->prepare ("UPDATE puestos SET cargo ='$cargo', salario = '$salario' WHERE ID = '".$_GET['id']."'");
     $insertSQL->execute();
     echo '<script>alert ("Actualización Exitosa");
     window.close("permisos_up.php");
@@ -49,17 +49,17 @@ if(isset($_POST["update"]))
 
             <tr>
                     <td>ID usuario</td>
-                    <td><input  name ="id_us" value="<?php echo $usua['id_us']?>" readonly></td>
+                    <td><input  name ="ID" value="<?php echo $usua['ID']?>" readonly></td>
                 </tr>
 
                 <tr>
                     <td>Fecha de salida</td>
-                    <td><input type="datetime-local" name ="fecha" value="<?php echo $usua['fecha']?>"></td>
+                    <td><input type="text" name ="cargo" value="<?php echo $usua['cargo']?>"></td>
                 </tr>
 
                 <tr>
                     <td>Fecha de reingreso</td>
-                    <td><input type="datetime-local" name ="fecha_reingreso" value="<?php echo $usua['fecha_reingreso']?>" ></td>
+                    <td><input type="text" name ="salario" value="<?php echo $usua['salario']?>" ></td>
                 </tr>
 
 

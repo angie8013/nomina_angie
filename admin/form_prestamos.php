@@ -151,7 +151,7 @@ if((isset($_POST["MM_insert"])) && ($_POST["MM_insert"] == "regm")) {
               <td><input class="form-control" name="ID_Es" type="text" value="<?php echo $resul['Estado'] ?>" readonly="readonly"/></td>
 
               <td><a href="?id=<?php echo $resul['ID_prest'] ?>" class="btn" onclick="window.open('prestamo_update.php?id=<?php echo $resul['ID_prest'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-edit"></i></a></td>
-              <td><a href="?id=<?php echo $resul['ID_prest'] ?>" class="btn" onclick="window.open('delete-reg.php?id=<?php echo $resul['ID_prest'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-trash-alt"></i></a></td>
+              <td><a href="?id=<?php echo $resul['ID_prest'] ?>" class="btn" onclick="window.open('prestamos_del.php?id=<?php echo $resul['ID_prest'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-trash-alt"></i></a></td>
 
             </tr>
             </tbody>

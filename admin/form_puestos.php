@@ -101,8 +101,8 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
               <td ><input class="form-control" name="cargo" type="text" value="<?php echo $resul['cargo'] ?>" readonly="readonly" /></td>
               <td><input class="form-control" name="salario" style="width: auto;" type="text" value="<?php echo $resul['salario'] ?>" readonly="readonly" /></td>
              
-              <td><a href="?id=<?php echo $resul['ID'] ?>" class="btn" onclick="window.open('update-reg.php?id=<?php echo $resul['ID'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-edit"></i></a></td>
-              <td><a href="?id=<?php echo $resul['ID'] ?>" class="btn" onclick="window.open('delete-reg.php?id=<?php echo $resul['ID'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-trash-alt"></i></a></td>
+              <td><a href="?id=<?php echo $resul['ID'] ?>" class="btn" onclick="window.open('puestos_up.php?id=<?php echo $resul['ID'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-edit"></i></a></td>
+              <td><a href="?id=<?php echo $resul['ID'] ?>" class="btn" onclick="window.open('puestos_del.php?id=<?php echo $resul['ID'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-trash-alt"></i></a></td>
 
             </tr>
             </tbody>

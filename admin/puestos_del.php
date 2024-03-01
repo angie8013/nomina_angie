@@ -4,25 +4,22 @@ require_once("../db/conection.php");
 $db = new Database();
 $con = $db->conectar();
 
-$sql = $con -> prepare ("SELECT * FROM permisos WHERE permisos.id_permiso = '".$_GET['id']."'");
+
+$sql = $con -> prepare ("SELECT * FROM puestos WHERE puestos.ID = '".$_GET['id']."'");
 $sql -> execute();
 $usua = $sql -> fetch();
 ?>
 
 <?php
-if(isset($_POST["update"]))
+if(isset($_POST["delete"]))
 {
-    $fecha = $_POST['fecha'];
-    $fecha_reingreso = $_POST['fecha_reingreso'];
-
-    $insertSQL = $con->prepare ("UPDATE permisos SET fecha ='$fecha', fecha_reingreso = '$fecha_reingreso' WHERE id_permiso = '".$_GET['id']."'");
+    $insertSQL = $con->prepare("DELETE FROM puestos WHERE puestos.ID = '".$_GET['id']."'");
     $insertSQL->execute();
-    echo '<script>alert ("Actualización Exitosa");
-    window.close("permisos_up.php");
-    </script>';
-
-    
+    echo '<script>alert ("Registro Eliminado Exitosamente");
+    window.close("empleados_del.php");
+    </script>'; 
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +35,8 @@ if(isset($_POST["update"]))
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" href="../../css/estilo.css">
+
     <title>Actualizar datos</title>
 </head>
 
@@ -49,31 +47,28 @@ if(isset($_POST["update"]))
 
             <tr>
                     <td>ID usuario</td>
-                    <td><input  name ="id_us" value="<?php echo $usua['id_us']?>" readonly></td>
+                    <td><input  name ="ID" value="<?php echo $usua['ID']?>" readonly></td>
                 </tr>
 
                 <tr>
                     <td>Fecha de salida</td>
-                    <td><input type="datetime-local" name ="fecha" value="<?php echo $usua['fecha']?>"></td>
+                    <td><input type="text" name ="cargo" value="<?php echo $usua['cargo']?>"></td>
                 </tr>
 
                 <tr>
                     <td>Fecha de reingreso</td>
-                    <td><input type="datetime-local" name ="fecha_reingreso" value="<?php echo $usua['fecha_reingreso']?>" ></td>
+                    <td><input type="text" name ="salario" value="<?php echo $usua['salario']?>" ></td>
                 </tr>
-
-
 
                 </tr>
             
-        
                 </tr>
 
                 <tr>
                     <td colspan="2">&nbsp;</td>
                 </tr> 
                 <tr>
-                    <td><input type="submit" name="update" value="Actualizar"></td>
+                    <td><input type="submit" name="delete" value="Eliminar"></td>
             </tr>
             </form>
             </table>

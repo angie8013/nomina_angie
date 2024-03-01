@@ -4,34 +4,22 @@ require_once("../db/conection.php");
 $db = new Database();
 $con = $db->conectar();
 
-$sql = $con -> prepare ("SELECT * FROM usuarios, puestos, roles WHERE usuarios.id_puesto = puestos.ID and usuarios.id_rol AND usuarios.id_us = '".$_GET['id']."'");
+
+$sql = $con -> prepare ("SELECT * FROM usuarios, puestos, roles WHERE usuarios.id_us = '".$_GET['id']."'");
 $sql -> execute();
 $usua = $sql -> fetch();
 ?>
 
 <?php
-if(isset($_POST["update"]))
+if(isset($_POST["delete"]))
 {
-    $id_us = $_POST['id_us'];
-    $nombre_us = $_POST['nombre_us'];
-    $apellido_us = $_POST['apellido_us'];
-    $correo_us = $_POST['correo_us'];
-    $pass = $_POST['pass'];
-    $tel_us = $_POST['tel_us'];
-    $id_puesto = $_POST['id_puesto'];
-    $id_rol = $_POST['id_rol'];
-    $Codigo = $_POST['Codigo'];
-
-    $insertSQL = $con->prepare ("UPDATE usuarios SET id_us ='$id_us', nombre_us = '$nombre_us', apellido_us = '$apellido_us', correo_us = '$correo_us', pass = '$pass', tel_us = '$tel_us', id_puesto = '$id_puesto',
-    id_rol = '$id_rol', Codigo = '$Codigo' WHERE id_us = '".$_GET['id']."'");
+    $insertSQL = $con->prepare("DELETE FROM usuarios WHERE id_us = '".$_GET['id']."'");
     $insertSQL->execute();
-    echo '<script>alert ("Actualización Exitosa");
-    window.close("empleados_up.php");
-
-    </script>';
-
-    
+    echo '<script>alert ("Registro Eliminado Exitosamente");
+    window.close("empleados_del.php");
+    </script>'; 
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -47,7 +35,8 @@ if(isset($_POST["update"]))
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" href="../../css/estilo.css">
+
     <title>Actualizar datos</title>
 </head>
 
@@ -129,7 +118,7 @@ if(isset($_POST["update"]))
                     <td colspan="2">&nbsp;</td>
                 </tr> 
                 <tr>
-                    <td><input type="submit" name="update" value="Actualizar"></td>
+                    <td><input type="submit" name="delete" value="Eliminar"></td>
             </tr>
             </form>
             </table>

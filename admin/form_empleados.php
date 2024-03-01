@@ -88,15 +88,15 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
           
           <div class="form-group col-md-3">
             <label>Telefono</label>
-            <input type="number" class="form-control border border-dark mb-3" name="tel_us" placeholder="Numero de contacto">
+            <input type="number" class="form-control border border-dark mb-3" name="tel_us" placeholder="">
           </div>
                     
           <div class="form-group col-md-3">
             <label>Codigo de seguridad</label>
-            <input type="text" class="form-control border border-dark mb-3" name="Codigo" placeholder="Numero de contacto">
+            <input type="text" class="form-control border border-dark mb-3" name="Codigo" placeholder="">
           </div>
           
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-3">
             <label >* Puesto</label>
             <select name="id_puesto" class="form-control border border-dark mb-3" required  >
                     <option value="">Seleccione Puesto</option>
@@ -111,7 +111,7 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
                                                     ?>
               </select>
           </div>
-          <div class="form-group col-md-4">
+          <div class="form-group col-md-2">
             <label >* Rol</label>
             <select name="id_rol" class="form-control border border-dark mb-3" required>
                     <option value="">Seleccione Rol</option>
@@ -176,7 +176,7 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
               <td><input class="form-control" name="id_rol" type="text" value="<?php echo $resul['TP_user'] ?>" readonly="readonly"/></td>
 
               <td><a href="?id=<?php echo $resul['id_us'] ?>" class="btn" onclick="window.open('empleados_up.php?id=<?php echo $resul['id_us'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-edit"></i></a></td>
-              <td><a href="?id=<?php echo $resul['id_us'] ?>" class="btn" onclick="window.open('delete-reg.php?id=<?php echo $resul['id_us'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-trash-alt"></i></a></td>
+              <td><a href="?id=<?php echo $resul['id_us'] ?>" class="btn" onclick="window.open('empleados_del.php?id=<?php echo $resul['id_us'] ?>','','width= 500,height=500, toolbar=NO');void(null);"><i class="uil uil-trash-alt"></i></a></td>
 
             </tr>
             </tbody>
