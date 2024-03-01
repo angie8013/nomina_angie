@@ -62,40 +62,39 @@ if((isset($_POST["MM_insert"]))&&($_POST["MM_insert"]=="regm")){
     <form action="#" name="form" method="post">
 
         <div class="row">
-          <div class="form-group  col-md-4">
-            <label >* Cedula</label>
-            <input type="text" class="form-control border border-dark mb-3" name="id_us" placeholder="Cedula del usuario" required>
-          </div>
-          <div class="form-group col-md-4">
-            <label >Nombre</label>
-            <input type="text" class="form-control border border-dark mb-3" name="nombre_us" placeholder="Nombre Completo">
-          </div>
-        
         <div class="form-group col-md-4">
-          <label>Apellido</label>
-          <input type="text" class="form-control border border-dark mb-3" name="apellido_us" placeholder="Apellido completo">
-        </div>
-   
-        <div class="form-group col-md-5">
-          <label>Correo</label>
-          <input type="text" class="form-control border border-dark mb-3" name="correo_us" placeholder="Correo electronico">
-        </div>
+    <label>* Cedula</label>
+    <input type="numb" pattern="[0-9]{1,10}" title="Solo se permiten números con un máximo de 10 dígitos" class="form-control border border-dark mb-3" name="id_us" placeholder="Cedula del usuario" required>
+  </div>
+  <div class="form-group col-md-4">
+    <label>Nombre</label>
+    <input type="text" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+" title="Solo se permiten letras" class="form-control border border-dark mb-3" name="nombre_us" placeholder="Nombre Completo">
+  </div>
 
-        <div class="form-group col-md-4">
-            <label>Contraseña</label>
-            <input type="password" class="form-control border border-dark mb-3" name="pass">
-          </div>
-          
-          <div class="form-group col-md-3">
-            <label>Telefono</label>
-            <input type="number" class="form-control border border-dark mb-3" name="tel_us" placeholder="">
-          </div>
-                    
-          <div class="form-group col-md-3">
-            <label>Codigo de seguridad</label>
-            <input type="text" class="form-control border border-dark mb-3" name="Codigo" placeholder="">
-          </div>
-          
+  <div class="form-group col-md-4">
+    <label>Apellido</label>
+    <input type="text" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ\s]+" title="Solo se permiten letras" class="form-control border border-dark mb-3" name="apellido_us" placeholder="Apellido completo">
+  </div>
+
+  <div class="form-group col-md-5">
+    <label>Correo</label>
+    <input type="email" class="form-control border border-dark mb-3" name="correo_us" placeholder="Correo electronico" required>
+  </div>
+
+  <div class="form-group col-md-4">
+    <label>Contraseña</label>
+    <input type="password" pattern="[A-Za-z0-9]{10}" title="Debe ser alfanumérica de 10 caracteres" class="form-control border border-dark mb-3" name="pass" required>
+  </div>
+
+  <div class="form-group col-md-3">
+    <label>Telefono</label>
+    <input type="tel" pattern="[0-9]{10}" title="Debe ser un número de 10 dígitos" class="form-control border border-dark mb-3" name="tel_us" placeholder="" required>
+  </div>
+
+  <div class="form-group col-md-3">
+    <label>Codigo de seguridad</label>
+    <input type="numb" pattern="[0-9]{10}" title="Debe ser un número de 10 dígitos" class="form-control border border-dark mb-3" name="Codigo" placeholder="" required>
+  </div>
           <div class="form-group col-md-3">
             <label >* Puesto</label>
             <select name="id_puesto" class="form-control border border-dark mb-3" required  >
